@@ -1,72 +1,86 @@
 'use strict';
 
-console.log('app.js is running');
+// console.log('app.js is running');
 
-var appInfo = {
-  title: 'Hello there',
-  subtitle: 'subtitle text',
-  options: ['one', 'two']
+// const appInfo = {
+//   title: 'Hello there',
+//   subtitle: 'subtitle text',
+//   options: ['one', 'two'] 
+// }
+
+// function listOption(option) {
+//   if (appInfo.options && appInfo.options.length > 0) {
+//     return <p>Here are your options: {appInfo.options}</p>
+//   } else {
+//     return <p>No options are available</p>
+//   }
+// }
+
+// const template = (
+//   <div>
+//     <h1>{appInfo.title}</h1>
+//     {appInfo.subtitle && <p>{appInfo.subtitle}</p>}
+//     <ol>
+//       <li>one</li>
+//       <li>two</li>
+//     </ol>
+//     {listOption(appInfo.options)}
+//     {/* 
+//     This could've been used as well for conditional rendering:
+//     <p>{app.options.length > 0 ? 'Here are your options' : 'no options'}</p>
+//     */}
+//   </div>
+//   );
+
+var count = 0;
+
+var increment = function increment() {
+  count = count + 1;
+  console.log(count + 1);
+  renderCounterApp();
 };
 
-function listOption(option) {
-  if (appInfo.options && appInfo.options.length > 0) {
-    return React.createElement(
-      'p',
-      null,
-      'Here are your options: ',
-      appInfo.options
-    );
-  } else {
-    return React.createElement(
-      'p',
-      null,
-      'No options are available'
-    );
-  }
-}
+var decrement = function decrement() {
+  count = count - 1;
+  console.log(count - 1);
+  renderCounterApp();
+};
 
-var template = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    appInfo.title
-  ),
-  appInfo.subtitle && React.createElement(
-    'p',
-    null,
-    appInfo.subtitle
-  ),
-  React.createElement(
-    'ol',
-    null,
-    React.createElement(
-      'li',
-      null,
-      'one'
-    ),
-    React.createElement(
-      'li',
-      null,
-      'two'
-    )
-  ),
-  listOption(appInfo.options),
-  React.createElement(
-    'h1',
-    null,
-    user.name ? user.name : 'anonymous'
-  ),
-  user.age && user.age > 18 && React.createElement(
-    'p',
-    null,
-    'Age: ',
-    user.age
-  ),
-  getLocation(user.location)
-);
+var reset = function reset() {
+  count = 0;
+  console.log('reset');
+  renderCounterApp();
+};
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+var renderCounterApp = function renderCounterApp() {
+  var templateTwo = React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      null,
+      'Count: ',
+      count
+    ),
+    React.createElement(
+      'button',
+      { onClick: increment, className: 'button' },
+      '+ 1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: decrement, className: 'button' },
+      '- 1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: reset, className: 'button' },
+      'reset'
+    )
+  );
+  ReactDOM.render(templateTwo, appRoot);
+};
+
+renderCounterApp();
