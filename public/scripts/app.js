@@ -4,8 +4,26 @@ console.log('app.js is running');
 
 var appInfo = {
   title: 'Hello there',
-  subtitle: 'subtitle text'
+  subtitle: 'subtitle text',
+  options: ['one', 'two']
 };
+
+function listOption(option) {
+  if (appInfo.options && appInfo.options.length > 0) {
+    return React.createElement(
+      'p',
+      null,
+      'Here are your options: ',
+      appInfo.options
+    );
+  } else {
+    return React.createElement(
+      'p',
+      null,
+      'No options are available'
+    );
+  }
+}
 
 var template = React.createElement(
   'div',
@@ -15,7 +33,7 @@ var template = React.createElement(
     null,
     appInfo.title
   ),
-  React.createElement(
+  appInfo.subtitle && React.createElement(
     'p',
     null,
     appInfo.subtitle
@@ -33,39 +51,20 @@ var template = React.createElement(
       null,
       'two'
     )
-  )
-);
-
-var user = {
-  name: 'Matt',
-  age: 32,
-  location: 'Wisconsin'
-};
-
-var userName = 'Matthew';
-var userAge = 32;
-var userLocation = 'Ashippun';
-
-var templateTwo = React.createElement(
-  'div',
-  null,
+  ),
+  listOption(appInfo.options),
   React.createElement(
     'h1',
     null,
-    user.name
+    user.name ? user.name : 'anonymous'
   ),
-  React.createElement(
+  user.age && user.age > 18 && React.createElement(
     'p',
     null,
     'Age: ',
     user.age
   ),
-  React.createElement(
-    'p',
-    null,
-    'Location: ',
-    user.location
-  )
+  getLocation(user.location)
 );
 
 var appRoot = document.getElementById('app');
