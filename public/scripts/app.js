@@ -2,18 +2,23 @@
 
 console.log('app.js is running');
 
+var appInfo = {
+  title: 'Hello there',
+  subtitle: 'subtitle text'
+};
+
 var template = React.createElement(
   'div',
   null,
   React.createElement(
     'h1',
     null,
-    'Matt Joers is writing a React App'
+    appInfo.title
   ),
   React.createElement(
     'p',
     null,
-    'This is some info'
+    appInfo.subtitle
   ),
   React.createElement(
     'ol',
@@ -30,6 +35,39 @@ var template = React.createElement(
     )
   )
 );
+
+var user = {
+  name: 'Matt',
+  age: 32,
+  location: 'Wisconsin'
+};
+
+var userName = 'Matthew';
+var userAge = 32;
+var userLocation = 'Ashippun';
+
+var templateTwo = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    user.name
+  ),
+  React.createElement(
+    'p',
+    null,
+    'Age: ',
+    user.age
+  ),
+  React.createElement(
+    'p',
+    null,
+    'Location: ',
+    user.location
+  )
+);
+
 var appRoot = document.getElementById('app');
 
 ReactDOM.render(template, appRoot);
