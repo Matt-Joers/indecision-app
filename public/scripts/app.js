@@ -1,86 +1,73 @@
 'use strict';
 
-// console.log('app.js is running');
+console.log('app.js is running');
 
-// const appInfo = {
-//   title: 'Hello there',
-//   subtitle: 'subtitle text',
-//   options: ['one', 'two'] 
-// }
-
-// function listOption(option) {
-//   if (appInfo.options && appInfo.options.length > 0) {
-//     return <p>Here are your options: {appInfo.options}</p>
-//   } else {
-//     return <p>No options are available</p>
-//   }
-// }
-
-// const template = (
-//   <div>
-//     <h1>{appInfo.title}</h1>
-//     {appInfo.subtitle && <p>{appInfo.subtitle}</p>}
-//     <ol>
-//       <li>one</li>
-//       <li>two</li>
-//     </ol>
-//     {listOption(appInfo.options)}
-//     {/* 
-//     This could've been used as well for conditional rendering:
-//     <p>{app.options.length > 0 ? 'Here are your options' : 'no options'}</p>
-//     */}
-//   </div>
-//   );
-
-var count = 0;
-
-var increment = function increment() {
-  count = count + 1;
-  console.log(count + 1);
-  renderCounterApp();
+var appInfo = {
+  title: 'Visibility Toggle',
+  subtitle: 'Information that should be visible',
+  visible: true
 };
 
-var decrement = function decrement() {
-  count = count - 1;
-  console.log(count - 1);
-  renderCounterApp();
+var show = function show() {
+  appInfo.visible = true;
+  renderTemplate();
 };
 
-var reset = function reset() {
-  count = 0;
-  console.log('reset');
-  renderCounterApp();
+var hide = function hide() {
+  appInfo.visible = false;
+  renderTemplate();
 };
+function listOption(option) {
+  if (appInfo.visible) {
+    return React.createElement(
+      'p',
+      null,
+      React.createElement(
+        'p',
+        null,
+        appInfo.subtitle
+      ),
+      React.createElement(
+        'button',
+        { onClick: hide, className: 'button' },
+        'Hide details'
+      )
+    );
+  } else {
+    return React.createElement(
+      'p',
+      null,
+      React.createElement('p', null),
+      React.createElement(
+        'button',
+        { onClick: show, className: 'button' },
+        'Show details'
+      )
+    );
+  }
+}
 
 var appRoot = document.getElementById('app');
 
-var renderCounterApp = function renderCounterApp() {
-  var templateTwo = React.createElement(
+var numbers = [55, 101, 1000];
+
+var renderTemplate = function renderTemplate() {
+  var template = React.createElement(
     'div',
     null,
     React.createElement(
       'h1',
       null,
-      'Count: ',
-      count
+      appInfo.title
     ),
     React.createElement(
-      'button',
-      { onClick: increment, className: 'button' },
-      '+ 1'
-    ),
-    React.createElement(
-      'button',
-      { onClick: decrement, className: 'button' },
-      '- 1'
-    ),
-    React.createElement(
-      'button',
-      { onClick: reset, className: 'button' },
-      'reset'
+      'div',
+      null,
+      listOption()
     )
   );
-  ReactDOM.render(templateTwo, appRoot);
+  {/*what to render and then where to render it */}
+  ReactDOM.render(template, appRoot);
 };
 
-renderCounterApp();
+renderTemplate();

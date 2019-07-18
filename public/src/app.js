@@ -1,68 +1,47 @@
-// console.log('app.js is running');
 
-// const appInfo = {
-//   title: 'Hello there',
-//   subtitle: 'subtitle text',
-//   options: ['one', 'two'] 
-// }
+console.log('app.js is running');
 
-// function listOption(option) {
-//   if (appInfo.options && appInfo.options.length > 0) {
-//     return <p>Here are your options: {appInfo.options}</p>
-//   } else {
-//     return <p>No options are available</p>
-//   }
-// }
+const appInfo = {
+  title: 'Visibility Toggle',
+  subtitle: 'Information that should be visible',
+  visible: true, 
+}
 
-// const template = (
-//   <div>
-//     <h1>{appInfo.title}</h1>
-//     {appInfo.subtitle && <p>{appInfo.subtitle}</p>}
-//     <ol>
-//       <li>one</li>
-//       <li>two</li>
-//     </ol>
-//     {listOption(appInfo.options)}
-//     {/* 
-//     This could've been used as well for conditional rendering:
-//     <p>{app.options.length > 0 ? 'Here are your options' : 'no options'}</p>
-//     */}
-//   </div>
-//   );
+const show = () => {
+  appInfo.visible = true;
+  renderTemplate();
+}
 
-let count = 0;
-
-const increment = () => {
-  count = count + 1;
-  console.log(count + 1);
-  renderCounterApp();
-};
-
-const decrement = () => {
-  count = count - 1;
-  console.log(count - 1);
-  renderCounterApp();
-};
-
-const reset = () => {
-  count = 0;
-  console.log('reset')
-  renderCounterApp();
-};
-
+const hide = () => {
+  appInfo.visible = false;
+  renderTemplate();
+}
+function listOption(option) {
+  if (appInfo.visible) {
+    return (<p><p>{appInfo.subtitle}</p>
+    <button onClick={hide} className="button">Hide details</button>
+    </p>);
+  } else {
+    return (<p>
+    <p></p>
+    <button  onClick={show} className="button">Show details</button>
+    </p>);
+  }
+}
 
 const appRoot = document.getElementById('app');
 
-const renderCounterApp = () => {
-  const templateTwo = (
+const numbers = [55, 101, 1000];
+
+const renderTemplate = () => {
+  const template = (
     <div>
-      <h1>Count: {count}</h1>
-      <button onClick={increment} className="button">+ 1</button>
-      <button onClick={decrement} className="button">- 1</button>
-      <button onClick={reset} className="button">reset</button>
+      <h1>{appInfo.title}</h1>
+      <div>{listOption()}</div>
     </div>
-  );
-  ReactDOM.render(templateTwo, appRoot);
+    );
+    {/*what to render and then where to render it */}
+  ReactDOM.render(template, appRoot);
 };
 
-renderCounterApp();
+renderTemplate();
