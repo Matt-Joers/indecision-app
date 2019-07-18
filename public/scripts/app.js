@@ -3,49 +3,48 @@
 console.log('app.js is running');
 
 var appInfo = {
-  title: 'Visibility Toggle',
-  subtitle: 'Information that should be visible',
-  visible: true
+  title: 'Indecision App',
+  subtitle: 'Create a list of To-dos and then click "what should I do?"',
+  options: []
 };
 
-var show = function show() {
-  appInfo.visible = true;
-  renderTemplate();
-};
-
-var hide = function hide() {
-  appInfo.visible = false;
-  renderTemplate();
-};
 function listOption(option) {
-  if (appInfo.visible) {
+  if (appInfo.options && appInfo.options.length > 0) {
     return React.createElement(
       'p',
       null,
-      React.createElement(
-        'p',
-        null,
-        appInfo.subtitle
-      ),
-      React.createElement(
-        'button',
-        { onClick: hide, className: 'button' },
-        'Hide details'
-      )
+      'Here are your options: ',
+      appInfo.options
     );
   } else {
     return React.createElement(
       'p',
       null,
-      React.createElement('p', null),
-      React.createElement(
-        'button',
-        { onClick: show, className: 'button' },
-        'Show details'
-      )
+      'No options are available'
     );
   }
 }
+var onFormSubmit = function onFormSubmit(e) {
+  e.preventDefault();
+  var option = e.target.elements.option.value;
+
+  if (option) {
+    appInfo.options.push(option);
+    e.target.elements.option.value = '';
+    renderTemplate();
+  }
+};
+
+var removeAll = function removeAll() {
+  appInfo.options = [];
+  renderTemplate();
+};
+
+var onMakeDecision = function onMakeDecision() {
+  var randomNum = Math.floor(Math.random() * appInfo.options.length);
+  var option = appInfo.options[randomNum];
+  alert(option);
+};
 
 var appRoot = document.getElementById('app');
 
@@ -60,13 +59,44 @@ var renderTemplate = function renderTemplate() {
       null,
       appInfo.title
     ),
-    React.createElement(
-      'div',
+    appInfo.subtitle && React.createElement(
+      'p',
       null,
-      listOption()
+      appInfo.subtitle
+    ),
+    React.createElement(
+      'button',
+      { disabled: appInfo.options.length === 0, onClick: onMakeDecision },
+      'What should I do?'
+    ),
+    React.createElement(
+      'button',
+      { onClick: removeAll, className: 'button' },
+      'Remove All'
+    ),
+    React.createElement(
+      'ol',
+      null,
+      appInfo.options.map(function (option) {
+        return React.createElement(
+          'li',
+          { key: option },
+          option
+        );
+      })
+    ),
+    listOption(appInfo.options),
+    React.createElement(
+      'form',
+      { onSubmit: onFormSubmit },
+      React.createElement('input', { type: 'text', name: 'option' }),
+      React.createElement(
+        'button',
+        null,
+        'Add Option'
+      )
     )
   );
-  {/*what to render and then where to render it */}
   ReactDOM.render(template, appRoot);
 };
 
