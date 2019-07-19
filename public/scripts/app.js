@@ -27,14 +27,13 @@ var Visibility = function (_React$Component) {
   _createClass(Visibility, [{
     key: 'visible',
     value: function visible() {
-      var _this2 = this;
-
-      this.setState(function (state) {
+      this.setState(function (prevState) {
         return {
-          visibility: !_this2.state.visibility
+          visibility: !prevState.visibility
+
         };
-        console.log(_this2.prevState.visibility);
       });
+      console.log(this.state.visibility);
     }
   }, {
     key: 'render',

@@ -9,12 +9,13 @@ class Visibility extends React.Component {
   }
   
   visible() {
-    this.setState((state) => {
+    this.setState((prevState) => {
       return {
-        visibility: !this.state.visibility
+        visibility: !prevState.visibility
+        
       };
-      console.log(this.prevState.visibility);
     });
+    console.log(this.state.visibility);
   }
 
   render() {
