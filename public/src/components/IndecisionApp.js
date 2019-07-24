@@ -8,7 +8,30 @@ export default class IndecisionApp extends React.Component {
   state = {
     options: []
   }
+  // passes to multiple layers > options and then option to remove an individual record
+  handleDeleteOption = (optionToRemove) => {
+    this.setState((prevState) => ({ 
+      options: prevState.options.filter((option) =>  optionToRemove !== option)
+    }));
+  }
 
+  handlePick = () => {
+    const randomNum = Math.floor(Math.random() * this.state.options.length);
+    const option = this.state.options[randomNum];
+    alert(option);
+  }
+
+  handleAddOption = (option) => {
+    if (!option) {
+      return 'Enter a valid value to add an item';
+    } else if (this.state.options.indexOf(option) > -1) {
+      return 'Please enter a unique value';
+    } 
+
+    this.setState((prevState) => 
+    ({options: prevState.options.concat([option])
+    }));
+  }
   componentDidMount() {
     try {
       const json = localStorage.getItem('options');
@@ -34,30 +57,7 @@ export default class IndecisionApp extends React.Component {
   handleDeleteOptions = () => {
       this.setState(() => ({ options: [] }));
   }
-  // passes to multiple layers > options and then option to remove an individual record
-  handleDeleteOption = (optionToRemove) => {
-    this.setState((prevState) => ({ 
-      options: prevState.options.filter((option) =>  optionToRemove !== option)
-    }));
-  }
 
-  handlePick = () => {
-    const randomNum = Math.floor(Math.random() * this.state.options.length);
-    const option = this.state.options[randomNum];
-    alert(option);
-  }
-
-  handleAddOption = (option) => {
-    if (!option) {
-      return 'Enter a valid value to add an item';
-    } else if (this.state.options.indexOf(option) > -1) {
-      return 'Please enter a unique value';
-    } 
-
-    this.setState((prevState) => 
-    ({options: prevState.options.concat([option])
-    }));
-  }
   
   // if (option) {
   //   this.props.handleAddOption(option);
