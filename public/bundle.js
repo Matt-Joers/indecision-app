@@ -65,9 +65,74 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_js__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__person_js__ = __webpack_require__(2);
+
+
 
 console.log('app.js is running');
+// console.log(square(5));
+// console.log(add(5, 10));
+console.log(__WEBPACK_IMPORTED_MODULE_1__person_js__["a" /* canDrink */](20));
+console.log(__WEBPACK_IMPORTED_MODULE_1__person_js__["c" /* isAdult */](18));
+console.log(__WEBPACK_IMPORTED_MODULE_0__utils_js__["a" /* default */](5, 8));
+console.log(__WEBPACK_IMPORTED_MODULE_1__person_js__["b" /* default */](64));
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+console.log('utils.js is running');
+
+const square = (x) => (x * x);
+/* unused harmony export square */
+
+
+const add = (a, b) => (a + b);
+/* unused harmony export add */
+
+// exports - default export - named exports
+// export { square, add };
+// const subtract  = (a, b) => a-b;
+
+/* harmony default export */ __webpack_exports__["a"] = ((a, b) => a-b);;
+
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const isAdult = (age) => age >= 18;
+/* harmony export (immutable) */ __webpack_exports__["c"] = isAdult;
+
+const canDrink = (drink) => drink >=21;
+/* harmony export (immutable) */ __webpack_exports__["a"] = canDrink;
+
+
+/* harmony default export */ __webpack_exports__["b"] = ((age) => age >= 65);
+// long hand expressions
+// export const isAdult = (age) => {
+//   if (age >= 18) {
+//     return true;
+//   } else {
+//     return false
+//   }
+// };
+
+// export const canDrink = (drink) => {
+//   if (drink >= 21) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// };
 
 /***/ })
 /******/ ]);
