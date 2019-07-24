@@ -2,21 +2,32 @@
 // install -> import -> Use
 import React from 'react';
 import ReactDOM from 'react-dom';
+import IndecisionApp from './components/IndecisionApp';
 
-const template = <p>Testing 1, 2, 3</p>;
-ReactDOM.render(template, document.getElementById('app'));
-// import validator from 'validator';
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
 
-// console.log(validator.isEmail('mattjoers@gmail.com'));
+class OldSyntax {
+  constructor(props) {
+    this.name = 'Matt';
+  }
+  getGreeting() {
+    return `Hi, my name is ${this.name}`;
+  }
+}
+const oldSyntax = new OldSyntax();
+const getGreeting = oldSyntax.getGreeting;
+console.log(oldSyntax);
+console.log(oldSyntax.getGreeting());
+// ----- no need to use constructor now!
 
-// import validator from '../../node_modules/validator/validator.js';
-// import subtracto, {square, add} from './utils.js';
-// import isSenior, { isAdult, canDrink } from './person.js';
+class NewSyntax {
+  name = 'Matt';
+  getGreeting = () => {
+    return `hello, my name is ${this.name}`;
+  }
+}
 
-// console.log('app.js is running');
-// console.log(square(5));
-// console.log(add(5, 10));
-// console.log(canDrink(20));
-// console.log(isAdult(18));
-// console.log(subtracto(5, 8));
-// console.log(isSenior(64));
+const newSyntax = new NewSyntax();
+const newGetGreeting = newSyntax.getGreeting;
+console.log(newSyntax);
+console.log(newGetGreeting())
